@@ -4,3 +4,4 @@ cleandata.py
 telegram_scraper.py
 Prod/
 .env
+Client/
