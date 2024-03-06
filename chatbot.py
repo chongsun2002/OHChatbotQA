@@ -19,7 +19,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 
 OPENAI_KEY = os.environ.get("OPENAI_KEY")
 embeddings= OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
-vector = FAISS.load_local('C:/Users/65845/OHChatBotMain/OHChatbotFAISSOpenAI', embeddings)
+vector = FAISS.load_local('OHChatbotFAISSOpenAI', embeddings)
 retriever = vector.as_retriever()
 llm = ChatOpenAI(openai_api_key=OPENAI_KEY)
 
