@@ -3,3 +3,4 @@ websitecleaned.txt
 cleandata.py
 telegram_scraper.py
 Prod/
+.env
