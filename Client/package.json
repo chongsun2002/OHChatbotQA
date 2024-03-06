@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@langchain/core": "^0.1.42"
+  },
+  "type": "module"
+}

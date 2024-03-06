@@ -40,19 +40,20 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 
 retrieval_chain = create_retrieval_chain(retriever_chain, document_chain)
 
-# def askQuestion(question, chat_history):
-#     result = retrieval_chain.invoke({
-#         "input": question,
-#         "chat_history": chat_history
-#     })
-#     answer = result['answer']
-#     human_message = HumanMessage(content=question)
-#     ai_message = AIMessage(content=answer)
-#     chat_history.append(human_message)
-#     chat_history.append(ai_message)
-#     return {
-#         "answer": answer,
-#         "chat_history": chat_history
-#     }
+def askQuestion(question, chat_history):
+    result = retrieval_chain.invoke({
+        "input": question,
+        "chat_history": chat_history
+    })
+    print(result)
+    answer = result['answer']
+    human_message = HumanMessage(content=question)
+    ai_message = AIMessage(content=answer)
+    chat_history.append(human_message)
+    chat_history.append(ai_message)
+    return {
+        "answer": answer,
+        "chat_history": chat_history
+    }
 
-# print(askQuestion("What types of rooms are available at CAPT?", []))
+print(askQuestion("What types of rooms are available at CAPT?", []))
