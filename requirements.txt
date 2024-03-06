@@ -30,7 +30,7 @@ langsmith==0.1.22
 marshmallow==3.21.1
 multidict==6.0.5
 mypy-extensions==1.0.0
-numpy==1.26.4
+numpy==1.24.4
 openai==1.13.3
 orjson==3.9.15
 packaging==23.2
