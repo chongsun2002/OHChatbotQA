@@ -17,7 +17,7 @@ from openai import RateLimitError
 
 from langchain_core.messages import AIMessage, HumanMessage
 
-OPENAI_KEY = os.environ.get("OPENAI_KEY")
+OPENAI_KEY = "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"#os.environ.get("OPENAI_KEY")
 embeddings= OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
 vector = FAISS.load_local('OHChatbotFAISSOpenAI', embeddings)
 retriever = vector.as_retriever()
@@ -40,20 +40,29 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 
 retrieval_chain = create_retrieval_chain(retriever_chain, document_chain)
 
-def askQuestion(question, chat_history):
+def ask_question(question, chat_history):
+    processed_history = []
+    for message in chat_history:
+        if message["role"] == "human":
+            processed_history.append(HumanMessage(content=message["content"]))
+        if message["role"] == "ai":
+            processed_history.append(AIMessage(content=message["content"]))
     result = retrieval_chain.invoke({
         "input": question,
-        "chat_history": chat_history
+        "chat_history": processed_history
     })
-    print(result)
     answer = result['answer']
-    human_message = HumanMessage(content=question)
-    ai_message = AIMessage(content=answer)
-    chat_history.append(human_message)
-    chat_history.append(ai_message)
+    chat_history.append({
+        "role": "human",
+        "content": question
+    })
+    chat_history.append({
+        "role": "ai",
+        "content": answer
+    })
     return {
         "answer": answer,
         "chat_history": chat_history
     }
 
-print(askQuestion("What types of rooms are available at CAPT?", []))
+# print(askQuestion("What types of rooms are available at CAPT?", []))

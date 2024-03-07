@@ -3,7 +3,7 @@ websitecleaned.txt
 cleandata.py
 telegram_scraper.py
 Prod/
-.env
 Client/node_modules
 Client/client.js
 Client/test.js
+.env

@@ -1,8 +1,10 @@
 from chatbot import retrieval_chain
 from fastapi.middleware.cors import CORSMiddleware
-
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from langserve import add_routes
+from langserve import APIHandler
+import json
+from chatbot import ask_question
 
 app = FastAPI(
     title="Chatbot Server",
@@ -19,11 +21,19 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-add_routes(
-    app,
-    retrieval_chain,
-    path="/ask",
-)
+# api_handler = APIHandler(retrieval_chain, path="/")
+
+@app.post("/invoke", include_in_schema=False)
+async def invoke(request: Request) -> Response:
+    s = await request.json()
+    answer = ask_question(s['input'], s['chat_history'])
+    return answer
+
+# add_routes(
+#     app,
+#     retrieval_chain, 
+#     path='/ask'
+# )
 
 # if __name__ == "__main__":
 #     import uvicorn
