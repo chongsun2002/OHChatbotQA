@@ -17,7 +17,7 @@ from openai import RateLimitError
 
 from langchain_core.messages import AIMessage, HumanMessage
 
-OPENAI_KEY = os.environ.get("OPENAI_KEY")
+OPENAI_KEY = "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"#os.environ.get("OPENAI_KEY")
 embeddings= OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
 vector = FAISS.load_local('OHChatbotFAISSOpenAI', embeddings)
 retriever = vector.as_retriever()

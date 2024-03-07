@@ -23,7 +23,7 @@ export async function invokeChain(chatHistory: ChatHistory[], question: string):
     //     chat_history: chatHistory,
     // });
     try {
-        const result = await axios.post('http://127.0.0.1:5000/invoke', {
+        const result = await axios.post('https://ohchatbotqa-production.up.railway.app/invoke', {
             input: question,
             chat_history: chatHistory
         })

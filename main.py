@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Request, Response
 from langserve import add_routes
 from langserve import APIHandler
-import json
 from chatbot import ask_question
 
 app = FastAPI(
